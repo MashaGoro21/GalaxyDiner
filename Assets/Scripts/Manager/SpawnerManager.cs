@@ -8,6 +8,11 @@ public class SpawnerManager : MonoBehaviour
 
     private float timer;
 
+    private void Awake()
+    {
+        timer = 0f;
+    }
+
     private void Update()
     {
         timer += Time.deltaTime;

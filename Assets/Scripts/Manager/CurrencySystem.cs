@@ -4,8 +4,8 @@ public class CurrencySystem : MonoBehaviour
 {
     public static CurrencySystem Instance;
 
-    [SerializeField] int money = 1000;
-    [SerializeField] int crystals = 0;
+    [SerializeField] int money;
+    [SerializeField] int crystals;
 
     private void Awake()
     {
@@ -28,6 +28,7 @@ public class CurrencySystem : MonoBehaviour
     public bool SpendMoney(int amount)
     {
         if (money < amount) return false;
+        
         money -= amount;
         UIManager.Instance.UpdateMoneyUI(money);
         return true;
@@ -42,8 +43,25 @@ public class CurrencySystem : MonoBehaviour
     public bool SpendCrystals(int amount)
     {
         if (crystals < amount) return false;
+        
         crystals -= amount;
         UIManager.Instance.UpdateCrystalsUI(crystals);
         return true;
+    }
+
+    public int GetMoney() => money;
+
+    public int GetCrystals() => crystals;
+
+    public void SetMoney(int amount) 
+    { 
+        money = amount;
+        UIManager.Instance.UpdateMoneyUI(money);
+    }
+
+    public void SetCrystals(int amount) 
+    { 
+        crystals = amount;
+        UIManager.Instance.UpdateCrystalsUI(crystals);
     }
 }

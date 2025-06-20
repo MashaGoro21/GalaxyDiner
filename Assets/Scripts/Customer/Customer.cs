@@ -4,13 +4,12 @@ using UnityEngine.AI;
 
 public class Customer : MonoBehaviour
 {
-    [SerializeField] float serviceTime = 2f;
-    [SerializeField] float eatingTime = 4f;
-    [SerializeField] int profit = 50;
-    [SerializeField] float moveSpeed = 2f;
+    [SerializeField] float serviceTime;
+    [SerializeField] float eatingTime;
+    [SerializeField] int profit;
+    [SerializeField] float moveSpeed;
 
     private static int customersServed = 0;
-
     private TableSpot assignedTable;
     private NavMeshAgent agent;
 
@@ -24,12 +23,7 @@ public class Customer : MonoBehaviour
         agent.updateRotation = true;
     }
 
-    public void MoveTo(Vector3 targetPos)
-    {
-        StartCoroutine(MoveToRoutine(targetPos));
-    }
-
-    IEnumerator MoveToRoutine(Vector3 targetPos)
+    public IEnumerator MoveToRoutine(Vector3 targetPos)
     {
         agent.SetDestination(targetPos);
         while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
@@ -65,8 +59,10 @@ public class Customer : MonoBehaviour
     IEnumerator ServiceRoutine()
     {
         yield return new WaitForSeconds(UpgradeManager.Instance.GetModifiedServiceTime(serviceTime));
+        
         QueueManager.Instance.isServing = false;
         QueueManager.Instance.RelocateAllCustomers();
+
         Vector3 targetPos = assignedTable.transform.position;
         StartCoroutine(MoveToTableRoutine(targetPos));
     }
@@ -74,7 +70,6 @@ public class Customer : MonoBehaviour
     IEnumerator MoveToTableRoutine(Vector3 targetPos)
     {
         agent.SetDestination(targetPos);
-
         while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
         {
             yield return null;
@@ -86,10 +81,13 @@ public class Customer : MonoBehaviour
     IEnumerator EatAndLeave()
     {
         yield return new WaitForSeconds(eatingTime);
+        
         assignedTable.Free();
         PayForEating();
         UIManager.Instance.UnlockButtons();
+        
         Destroy(gameObject);
+        
         QueueManager.Instance.TryServe();
     }
 
@@ -101,12 +99,6 @@ public class Customer : MonoBehaviour
             CurrencySystem.Instance.AddCrystals(1);
             customersServed = 0;
         }
-        else
-        {
-            CurrencySystem.Instance.AddMoney(profit);
-        }
-        
+        else CurrencySystem.Instance.AddMoney(profit);
     }
 }
-
-

@@ -6,25 +6,43 @@ public class BuildManager : MonoBehaviour
 
     [SerializeField] GameObject tablePrefab;
     [SerializeField] Transform[] buildSpots;
-    [SerializeField] int tableCost = 200;
+    [SerializeField] int tableCost;
 
-    private int currentSpotIndex = 0;
+    private int currentSpotIndex;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        currentSpotIndex = 0;
     }
 
     public void BuildTable()
     {
-        if (currentSpotIndex < buildSpots.Length && CurrencySystem.Instance.SpendMoney(tableCost))
+        if (CanBeBuilt() && CurrencySystem.Instance.SpendMoney(tableCost))
         {
             Transform spot = buildSpots[currentSpotIndex];
-            TableSpot table = Instantiate(tablePrefab, spot.position, Quaternion.identity).GetComponent<TableSpot>().GetComponent<TableSpot>();
-            TableManager.Instance.tables.Add(table);
-            QueueManager.Instance.TryServe();
+            SpawnTable(spot.position);
             currentSpotIndex++;
+
+            QueueManager.Instance.TryServe();
         }
     }
+
+    public void SpawnTable(Vector3 position)
+    {
+        TableSpot table = Instantiate(tablePrefab, position, Quaternion.identity).GetComponent<TableSpot>();
+        TableManager.Instance.tables.Add(table);
+    }
+
+    public bool CanBeBuilt()
+    {
+        if (currentSpotIndex >= buildSpots.Length) return false;
+        return true;
+    }
+
+    public int GetCurrentSpotIndex() => currentSpotIndex;
+
+    public int SetCurrentSpotIndex(int amount) => currentSpotIndex = amount;
 }

@@ -48,8 +48,9 @@ public class UIManager : MonoBehaviour
     public void UnlockButtons()
     {
         if (isUnlockedButtons) return;
-        buildButton.UnlockBuildButton();
-        upgradeButton.UnlockUpgradeButton();
+
+        buildButton.UnlockBuildButton(true);
+        upgradeButton.UnlockUpgradeButton(true);
         isUnlockedButtons = true;
     }
 
@@ -62,5 +63,4 @@ public class UIManager : MonoBehaviour
     {
         return dishesPanel.activeInHierarchy;
     }
-
 }

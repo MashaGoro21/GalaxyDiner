@@ -6,10 +6,10 @@ public class QueueManager : MonoBehaviour
     public static QueueManager Instance;
 
     [SerializeField] Transform queueStartPoint;
-    [SerializeField] float spacing = 1.5f;
+    [SerializeField] float spacing;
     [SerializeField] int queueSize;
     
-    public bool isServing = false;
+    public bool isServing;
     
     private List<Vector3> positionList;
     private List<Customer> customerQueue;
@@ -18,6 +18,8 @@ public class QueueManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        isServing = false;
 
         positionList = new List<Vector3>();
         customerQueue = new List<Customer>();
@@ -36,7 +38,7 @@ public class QueueManager : MonoBehaviour
     public void AddCustomer(Customer customer)
     {
         customerQueue.Add(customer);
-        customer.MoveTo(positionList[customerQueue.IndexOf(customer)]);
+        StartCoroutine(customer.MoveToRoutine(positionList[customerQueue.IndexOf(customer)]));
     }
 
     private Customer GetFirstInQueue()
@@ -64,7 +66,7 @@ public class QueueManager : MonoBehaviour
     {
         for(int i = 0; i < customerQueue.Count; i++)
         {
-            customerQueue[i].MoveTo(positionList[i]);
+            StartCoroutine(customerQueue[i].MoveToRoutine(positionList[i]));
         }
     }
 }

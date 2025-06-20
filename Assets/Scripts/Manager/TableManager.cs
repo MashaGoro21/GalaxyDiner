@@ -26,4 +26,23 @@ public class TableManager : MonoBehaviour
     {
         return GetFreeTable() != null;
     }
+
+    public List<TableSpot> GetAll() => new(tables);
+
+    public void SetAll(List<Vector3> tablePositions)
+    {
+        foreach(var tablePosition in tablePositions)
+        {
+            BuildManager.Instance.SpawnTable(tablePosition);
+        }
+    }
+
+    public void ClearAllTables()
+    {
+        foreach (var t in tables)
+        {
+            Destroy(t.gameObject);
+        }
+        tables.Clear();
+    }
 }

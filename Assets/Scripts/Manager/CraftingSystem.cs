@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,10 +39,5 @@ public class CraftingSystem : MonoBehaviour
         IngredientInventory.Instance.UseIngredients(recipes[dish]);
         UIManager.Instance.UpdateIngredientsUI(IngredientInventory.Instance.GetIngredientsAmount());
         return true;
-    }
-
-    public Dictionary<string, int> GetRecipe(string dish)
-    {
-        return recipes.ContainsKey(dish) ? recipes[dish] : null;
     }
 }

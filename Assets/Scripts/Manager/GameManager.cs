@@ -3,8 +3,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    
-    [SerializeField] int money = 1000;
+
+    [SerializeField] GameObject introCutscene;
 
     private void Awake()
     {
@@ -14,23 +14,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UIManager.Instance.UpdateMoneyUI(money);
-    }
-
-    public void AddMoney(int amount)
-    {
-        money += amount;
-        UIManager.Instance.UpdateMoneyUI(money);
-    }
-
-    public bool SpendMoney(int amount)
-    {
-        if(money >= amount)
+        if (SaveManager.ShouldLoadGame)
         {
-            money -= amount;
-            UIManager.Instance.UpdateMoneyUI(money);
-            return true;
+            SaveManager.ShouldLoadGame = false;
+            SaveManager.Instance.LoadGame();
+            introCutscene.SetActive(false);
         }
-        return false;
     }
 }

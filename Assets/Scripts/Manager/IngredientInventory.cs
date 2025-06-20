@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,9 +19,15 @@ public class IngredientInventory : MonoBehaviour
         ingredients["AstroSauce"] = 0;
     }
 
+    private void Start()
+    {
+        UIManager.Instance.UpdateIngredientsUI(GetIngredientsAmount());
+    }
+
     public void AddIngredient(string name, int amount)
     {
         if (!ingredients.ContainsKey(name)) return;
+        
         ingredients[name] += amount;
         UIManager.Instance.UpdateIngredientsUI(GetIngredientsAmount());
     }
@@ -45,13 +50,15 @@ public class IngredientInventory : MonoBehaviour
         }
     }
 
-    public int GetAmount(string name)
-    {
-        return ingredients.ContainsKey(name) ? ingredients[name] : 0;
-    }
-
     public int[] GetIngredientsAmount()
     {
         return new int[]{ ingredients["SpaceMeat"], ingredients["MoonBread"], ingredients["AstroSauce"]};
+    }
+
+    public Dictionary<string, int> GetAll() => new(ingredients);
+
+    public void SetAll(Dictionary<string, int> saved)
+    {
+        ingredients = new(saved);
     }
 }

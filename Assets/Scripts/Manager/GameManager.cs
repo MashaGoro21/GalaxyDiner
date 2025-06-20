@@ -10,10 +10,7 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
-    }
 
-    private void Start()
-    {
         if (SaveManager.ShouldLoadGame)
         {
             SaveManager.ShouldLoadGame = false;

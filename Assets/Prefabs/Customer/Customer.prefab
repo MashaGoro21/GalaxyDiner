@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JR-1 mod1 idle
       objectReference: {fileID: 0}
+    - target: {fileID: 6570380489123821582, guid: 852f04809b993b24298c91cf0229b149, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7887482892760582685, guid: 852f04809b993b24298c91cf0229b149, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

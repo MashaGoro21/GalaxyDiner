@@ -23,16 +23,16 @@ public class BuildManager : MonoBehaviour
         if (CanBeBuilt() && CurrencySystem.Instance.SpendMoney(tableCost))
         {
             Transform spot = buildSpots[currentSpotIndex];
-            SpawnTable(spot.position);
+            SpawnTable(spot);
             currentSpotIndex++;
 
             QueueManager.Instance.TryServe();
         }
     }
 
-    public void SpawnTable(Vector3 position)
+    public void SpawnTable(Transform spot)
     {
-        TableSpot table = Instantiate(tablePrefab, position, Quaternion.identity).GetComponent<TableSpot>();
+        TableSpot table = Instantiate(tablePrefab, spot.position, spot.rotation).GetComponent<TableSpot>();
         TableManager.Instance.tables.Add(table);
     }
 

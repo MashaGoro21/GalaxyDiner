@@ -29,7 +29,7 @@ public class TableManager : MonoBehaviour
 
     public List<TableSpot> GetAll() => new(tables);
 
-    public void SetAll(List<Vector3> tablePositions)
+    public void SetAll(List<Transform> tablePositions)
     {
         foreach(var tablePosition in tablePositions)
         {

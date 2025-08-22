@@ -9,7 +9,7 @@ public class GameSaveData
     public int crystals;
     
     public int currentSpotIndex;
-    public List<Vector3> tablePosition = new();
+    public List<Transform> tablePosition = new();
 
     public List<IngredientEntry> ingredients = new();
 

@@ -25,7 +25,7 @@ public class SpawnerManager : MonoBehaviour
 
     void SpawnCustomer()
     {
-        Customer customer = Instantiate(customerPrefab, spawnPoint.position, Quaternion.identity).GetComponent<Customer>();
+        Customer customer = Instantiate(customerPrefab, spawnPoint.position, transform.rotation).GetComponent<Customer>();
         QueueManager.Instance.AddCustomer(customer);
     }
 }

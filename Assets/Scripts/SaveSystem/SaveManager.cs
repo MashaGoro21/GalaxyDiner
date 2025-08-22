@@ -31,7 +31,7 @@ public class SaveManager : MonoBehaviour
 
         foreach(var table in TableManager.Instance.GetAll())
         {
-            data.tablePosition.Add(table.transform.position);
+            data.tablePosition.Add(table.transform);
         }
 
         foreach (var ingredient in IngredientInventory.Instance.GetAll())

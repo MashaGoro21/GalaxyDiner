@@ -46,7 +46,6 @@ public class QueueManager : MonoBehaviour
         if(customerQueue.Count == 0) return null;
 
         Customer customer = customerQueue[0];
-        customerQueue.RemoveAt(0);
         return customer;
     }
 
@@ -64,6 +63,8 @@ public class QueueManager : MonoBehaviour
 
     public void RelocateAllCustomers()
     {
+        customerQueue.RemoveAt(0);
+
         for(int i = 0; i < customerQueue.Count; i++)
         {
             StartCoroutine(customerQueue[i].MoveToRoutine(positionList[i]));

@@ -17,9 +17,9 @@ public class Customer : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
-        agent.angularSpeed = 180f;
+        agent.angularSpeed = 45f;
         agent.acceleration = 8;
-        agent.stoppingDistance = 0.01f;
+        agent.stoppingDistance = 0.1f;
         agent.updateRotation = true;
     }
 

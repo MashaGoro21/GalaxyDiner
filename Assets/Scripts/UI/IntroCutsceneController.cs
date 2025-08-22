@@ -20,6 +20,7 @@ public class IntroCutsceneController : MonoBehaviour
         "Let the journey begin.";
 
     private bool finishedTyping;
+    private Coroutine typingCoroutine;
 
     private void Awake()
     {
@@ -27,6 +28,11 @@ public class IntroCutsceneController : MonoBehaviour
     }
 
     private void Start()
+    {
+        StartTyping();
+    }
+
+    private void StartTyping()
     {
         managers.SetActive(false);
         mainUI.alpha = 0;
@@ -36,15 +42,7 @@ public class IntroCutsceneController : MonoBehaviour
         cutsceneGroup.blocksRaycasts = true;
         cutsceneText.text = "";
         promptText.SetActive(false);
-        StartCoroutine(TypeText(fullCutsceneText));
-    }
-
-    private void Update()
-    {
-        if (finishedTyping && Input.GetKeyDown(KeyCode.Return))
-        {
-            EndCutscene();
-        }
+        typingCoroutine = StartCoroutine(TypeText(fullCutsceneText));
     }
 
     IEnumerator TypeText(string fullText)
@@ -57,6 +55,25 @@ public class IntroCutsceneController : MonoBehaviour
 
         finishedTyping = true;
         promptText.SetActive(true);
+    }
+
+    private void ShowFullText()
+    {
+        if(typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        cutsceneText.text = fullCutsceneText;
+        finishedTyping = true;
+        promptText.SetActive(true);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            ShowFullText();
+
+        if (finishedTyping && Input.GetKeyDown(KeyCode.Return))
+            EndCutscene();
     }
 
     private void EndCutscene()

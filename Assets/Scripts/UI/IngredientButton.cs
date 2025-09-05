@@ -7,8 +7,9 @@ public class IngredientButton : MonoBehaviour
 
     public void OnClick()
     {
-        if(CurrencySystem.Instance.SpendMoney(cost))
+        if(cost <= CurrencySystem.Instance.GetMoney())
         {
+            CurrencySystem.Instance.SpendMoney(cost);
             IngredientInventory.Instance.AddIngredient(ingredientName, 1);
         }
     }

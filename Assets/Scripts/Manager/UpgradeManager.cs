@@ -6,7 +6,7 @@ public class UpgradeManager : MonoBehaviour
 
     [SerializeField] int upgradeCost;
     [SerializeField] float speedBonus;
-    [SerializeField] int upgradingNumber;
+    [SerializeField] int upgradingMaxNumber;
 
     private int upgradedTimes;
     private float serviceTimeModifier;
@@ -22,11 +22,11 @@ public class UpgradeManager : MonoBehaviour
 
     public void BuySpeedUpgrade()
     {
-        if (CurrencySystem.Instance.SpendCrystals(upgradeCost) && CanBeUpgraded())
-        {
-            serviceTimeModifier *= speedBonus;
-            upgradedTimes++;
-        }
+        if (!CanBeUpgraded()) return;
+
+        CurrencySystem.Instance.SpendCrystals(upgradeCost);
+        serviceTimeModifier *= speedBonus;
+        upgradedTimes++;
     }
 
     public float GetModifiedServiceTime(float baseTime)
@@ -36,7 +36,7 @@ public class UpgradeManager : MonoBehaviour
 
     public bool CanBeUpgraded()
     {
-        if (upgradedTimes >= upgradingNumber) return false;
+        if (upgradedTimes >= upgradingMaxNumber || upgradeCost > CurrencySystem.Instance.GetCrystals()) return false;
         return true;
     }
 

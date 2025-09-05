@@ -27,13 +27,13 @@ public class TableManager : MonoBehaviour
         return GetFreeTable() != null;
     }
 
-    public List<TableSpot> GetAll() => new(tables);
+    public List<TableSpot> GetTables() => new(tables);
 
-    public void SetAll(List<Transform> tablePositions)
+    public void SetTables(Vector3[] positions, Quaternion[] rotations)
     {
-        foreach(var tablePosition in tablePositions)
+        for(int i = 0; i < positions.Length; i++)
         {
-            BuildManager.Instance.SpawnTable(tablePosition);
+            BuildManager.Instance.SpawnTable(positions[i], rotations[i]);
         }
     }
 

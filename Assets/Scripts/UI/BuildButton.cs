@@ -11,14 +11,15 @@ public class BuildButton : MonoBehaviour
         button.interactable = false;
     }
 
+    private void Update()
+    {
+        if (!BuildManager.Instance.CanBeBuilt()) UnlockBuildButton(false);
+        else UnlockBuildButton(true);
+    }
+
     public void OnClick()
     {
         BuildManager.Instance.BuildTable();
-
-        if(!BuildManager.Instance.CanBeBuilt())
-        {
-            UnlockBuildButton(false);
-        }
     }
 
     public void UnlockBuildButton(bool isUnlock)

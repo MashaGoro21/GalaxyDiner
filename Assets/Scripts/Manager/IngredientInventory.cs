@@ -55,9 +55,9 @@ public class IngredientInventory : MonoBehaviour
         return new int[]{ ingredients["SpaceMeat"], ingredients["MoonBread"], ingredients["AstroSauce"]};
     }
 
-    public Dictionary<string, int> GetAll() => new(ingredients);
+    public Dictionary<string, int> GetIngredients() => new(ingredients);
 
-    public void SetAll(Dictionary<string, int> saved)
+    public void SetIngredients(Dictionary<string, int> saved)
     {
         ingredients = new(saved);
     }

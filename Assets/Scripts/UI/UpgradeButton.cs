@@ -11,15 +11,15 @@ public class UpgradeButton : MonoBehaviour
         button.interactable = false;
     }
 
+    private void Update()
+    {
+        if (!UpgradeManager.Instance.CanBeUpgraded()) UnlockUpgradeButton(false);
+        else UnlockUpgradeButton(true);
+    }
+
     public void OnClick()
     {
         UpgradeManager.Instance.BuySpeedUpgrade();
-
-        if(!UpgradeManager.Instance.CanBeUpgraded())
-        {
-            UnlockUpgradeButton(false);
-        }
-
     }
 
     public void UnlockUpgradeButton(bool isUnlock)

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5584841324965999177}
   - component: {fileID: 890779391081082455}
   - component: {fileID: 562780173408021428}
+  - component: {fileID: 1626300667084006533}
   m_Layer: 0
   m_Name: Customer
   m_TagString: Untagged
@@ -52,6 +53,14 @@ MonoBehaviour:
   eatingTime: 4
   profit: 50
   moveSpeed: 2
+  possibleCustomerColors:
+  - {r: 0.33708075, g: 0.35171568, b: 0.4867924, a: 0}
+  - {r: 0.8009327, g: 0.8649985, b: 0.98490566, a: 0}
+  - {r: 0.36297584, g: 0.3396582, b: 0.7660377, a: 0}
+  - {r: 0.25147024, g: 0.674972, b: 0.7283019, a: 0}
+  - {r: 0.28235295, g: 0.40392157, b: 0.7137255, a: 0}
+  - {r: 0.5419869, g: 0.38888568, b: 0.7283019, a: 0}
+  loadingBar: {fileID: 0}
 --- !u!195 &5584841324965999177
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -122,6 +131,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!95 &1626300667084006533
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6748777313907334703}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: eaa33fc9e71ce3e44bfc9d6aba81b6f0, type: 3}
+  m_Controller: {fileID: 9100000, guid: f02298c6428ae6448b2a4ce0d2bf88f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &7160931848725018049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -178,6 +208,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8069501107841873809, guid: 852f04809b993b24298c91cf0229b149, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bece8d0c1084e4b41bcbaa90eb4b0ff7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6461254814990436613}
   - component: {fileID: 647120996103886654}
   - component: {fileID: 6508042891541618768}
+  - component: {fileID: 6156224310390872410}
+  - component: {fileID: 647681306284232217}
   m_Layer: 0
   m_Name: Assistant
   m_TagString: Untagged
@@ -71,6 +73,39 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.36, y: 2, z: 0.67}
   m_Center: {x: 0, y: 0.98, z: 0}
+--- !u!114 &6156224310390872410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683531842879332256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b15c7429b73ea418f2ece689f35121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &647681306284232217
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683531842879332256}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: eaa33fc9e71ce3e44bfc9d6aba81b6f0, type: 3}
+  m_Controller: {fileID: 9100000, guid: 0e9f9da3c2d10944e923d2d9cd11b892, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &7945807066055706833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -373,7 +408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7887482892760582685, guid: 852f04809b993b24298c91cf0229b149, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.306
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7887482892760582685, guid: 852f04809b993b24298c91cf0229b149, type: 3}
       propertyPath: m_LocalRotation.w
@@ -403,7 +438,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 288217349866366823, guid: 852f04809b993b24298c91cf0229b149, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

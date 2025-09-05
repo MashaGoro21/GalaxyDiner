@@ -9,7 +9,7 @@ public class GameSaveData
     public int crystals;
     
     public int currentSpotIndex;
-    public List<Transform> tablePosition = new();
+    public List<Table> tablePosition = new();
 
     public List<IngredientEntry> ingredients = new();
 
@@ -22,4 +22,11 @@ public class IngredientEntry
 {
     public string name;
     public int amount;
+}
+
+[Serializable]
+public class Table
+{
+    public float posX, posY, posZ;
+    public float rotX, rotY, rotZ, rotW;
 }

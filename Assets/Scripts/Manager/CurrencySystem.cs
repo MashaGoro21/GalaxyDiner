@@ -25,13 +25,10 @@ public class CurrencySystem : MonoBehaviour
         UIManager.Instance.UpdateMoneyUI(money);
     }
 
-    public bool SpendMoney(int amount)
-    {
-        if (money < amount) return false;
-        
+    public void SpendMoney(int amount)
+    {    
         money -= amount;
         UIManager.Instance.UpdateMoneyUI(money);
-        return true;
     }
 
     public void AddCrystals(int amount)
@@ -40,13 +37,10 @@ public class CurrencySystem : MonoBehaviour
         UIManager.Instance.UpdateCrystalsUI(crystals);
     }
 
-    public bool SpendCrystals(int amount)
-    {
-        if (crystals < amount) return false;
-        
+    public void SpendCrystals(int amount)
+    {     
         crystals -= amount;
         UIManager.Instance.UpdateCrystalsUI(crystals);
-        return true;
     }
 
     public int GetMoney() => money;

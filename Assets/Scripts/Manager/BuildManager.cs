@@ -20,25 +20,26 @@ public class BuildManager : MonoBehaviour
 
     public void BuildTable()
     {
-        if (CanBeBuilt() && CurrencySystem.Instance.SpendMoney(tableCost))
-        {
-            Transform spot = buildSpots[currentSpotIndex];
-            SpawnTable(spot);
-            currentSpotIndex++;
+        if (!CanBeBuilt()) return;
 
-            QueueManager.Instance.TryServe();
-        }
+        CurrencySystem.Instance.SpendMoney(tableCost);
+        Transform spot = buildSpots[currentSpotIndex];
+        SpawnTable(spot.position, spot.rotation);
+        Destroy(spot.gameObject);
+        currentSpotIndex++;
+
+        QueueManager.Instance.TryServe();
     }
 
-    public void SpawnTable(Transform spot)
+    public void SpawnTable(Vector3 pos, Quaternion rot)
     {
-        TableSpot table = Instantiate(tablePrefab, spot.position, spot.rotation).GetComponent<TableSpot>();
+        TableSpot table = Instantiate(tablePrefab, pos, rot).GetComponent<TableSpot>();
         TableManager.Instance.tables.Add(table);
     }
 
     public bool CanBeBuilt()
     {
-        if (currentSpotIndex >= buildSpots.Length) return false;
+        if (currentSpotIndex >= buildSpots.Length || tableCost > CurrencySystem.Instance.GetMoney()) return false;
         return true;
     }
 

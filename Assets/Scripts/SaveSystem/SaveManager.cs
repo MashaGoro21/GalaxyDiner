@@ -29,12 +29,22 @@ public class SaveManager : MonoBehaviour
         data.upgradedTimes = UpgradeManager.Instance.GetUpgradedTimes();
         data.serviceTimeModifier = UpgradeManager.Instance.GetServiceTimeModifier();
 
-        foreach(var table in TableManager.Instance.GetAll())
+        foreach (var table in TableManager.Instance.GetTables())
         {
-            data.tablePosition.Add(table.transform);
+            Table t = new Table
+            {
+                posX = table.transform.position.x,
+                posY = table.transform.position.y,
+                posZ = table.transform.position.z,
+                rotX = table.transform.rotation.x,
+                rotY = table.transform.rotation.y,
+                rotZ = table.transform.rotation.z,
+                rotW = table.transform.rotation.w
+            };
+            data.tablePosition.Add(t);
         }
 
-        foreach (var ingredient in IngredientInventory.Instance.GetAll())
+        foreach (var ingredient in IngredientInventory.Instance.GetIngredients())
         {
             data.ingredients.Add(new IngredientEntry { name = ingredient.Key, amount = ingredient.Value });
         }
@@ -60,10 +70,28 @@ public class SaveManager : MonoBehaviour
         {
             restored[entry.name] = entry.amount;
         }
-        IngredientInventory.Instance.SetAll(restored);
+        IngredientInventory.Instance.SetIngredients(restored);
+
+        foreach (var table in data.tablePosition)
+        {
+            Debug.Log(table);
+        }
 
         TableManager.Instance.ClearAllTables();
-        TableManager.Instance.SetAll(data.tablePosition);
+
+        Vector3[] positions = new Vector3[data.tablePosition.Count];
+        Quaternion[] rotations = new Quaternion[data.tablePosition.Count];
+
+        for(int i = 0; i < data.tablePosition.Count; i++)
+        {
+            Vector3 pos = new Vector3(data.tablePosition[i].posX, data.tablePosition[i].posY, data.tablePosition[i].posZ);
+            Quaternion rot = new Quaternion(data.tablePosition[i].rotX, data.tablePosition[i].rotY, data.tablePosition[i].rotZ, data.tablePosition[i].rotW);
+
+            positions[i] = pos;
+            rotations[i] = rot;
+        }
+
+        TableManager.Instance.SetTables(positions, rotations);
 
         UpgradeManager.Instance.SetUpgradedTimes(data.upgradedTimes);
         UpgradeManager.Instance.SetServiceTimeModifier(data.serviceTimeModifier);

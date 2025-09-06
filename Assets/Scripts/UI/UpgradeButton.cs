@@ -13,6 +13,7 @@ public class UpgradeButton : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(UpgradeManager.Instance.CanBeUpgraded());
         if (!UpgradeManager.Instance.CanBeUpgraded()) UnlockUpgradeButton(false);
         else UnlockUpgradeButton(true);
     }
